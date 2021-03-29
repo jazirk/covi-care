@@ -1,17 +1,71 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="home-page">
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="chevron-down-circle-outline"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<div class="header">
+    <div class="header_title">
+        COVICare
+    </div>
+    <div class="header_toggle">
+        <span class="header_toggle-one ion-align-items-center ion-flex ion-justify-content-center"
+              [class.selected]="countrySelected" (click)="getDetailsToday(true,false)">My country</span>
+        <span class="header_toggle-two ion-align-items-center ion-flex ion-justify-content-center"
+              [class.selected]="!countrySelected" (click)="getDetailsToday(true, false)">Global</span>
+    </div>
+    <div class="header_day ion-flex ion-justify-content-end">
+        <span (click)="getDetailsToday(true)" [class.selected] = "todaySelected">Today</span>
+        <span (click)="getDetailsToday(false)" [class.selected] = "!todaySelected">Yesterday</span>
+    </div>
+    <div class="header_stats">
+        <div class="header_stats-total count">
+            <div class="header_stats-details">
+                Active
+                <p class="counter">0</p>
+            </div>
+        </div>
+        <div class="header_stats-active count">
+            <div *ngIf="covidData else skeleton" class="header_stats-details">
+                New
+                <p>{{covidData?.totalCases}}</p>
+                <div><span>+</span><p class="counter">{{covidData?.todayCases}}</p></div>
+            </div>
+        </div>
+        <div class="header_stats-recovered count">
+            <div class="header_stats-details">
+                Recovered
+                <p>{{covidData?.totalRecovered}}</p>
+                <div><span>+</span><p class="counter">+<span>{{covidData?.todayRecovered}}</span></p></div>
+            </div>
+        </div>
+        <div class="header_stats-deaths count">
+            <div class="header_stats-details">
+                Deaths
+                <p>{{covidData?.totalDeaths}}</p>
+                <div><span>+</span><p class="counter">{{covidData?.todayDeaths}}</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="timeline">
+        <div class="timeline_title">Past 7 days</div>
+        <canvas id="canvas"  #canvas>{{ chart }}</canvas>
+    </div>
+<!--    <app-home-chart *ngIf="chartConfig" [chartConfig]="chartConfig"></app-home-chart>-->
+</div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+<ng-template #skeleton>
+    <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+</ng-template>
 </ion-content>
+

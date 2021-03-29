@@ -1,1 +1,9 @@
-
+@import "src/theme/variables";
+.tab-bar {
+  border: none;
+  background-color: $color-background;
+ ion-tab-button {
+   padding: 5px;
+   background-color: $color-background;
+ }
+}
