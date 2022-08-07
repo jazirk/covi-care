@@ -1,0 +1,12 @@
+<div class="news-item">
+  <ion-avatar slot="start">
+    <img class="news-image" [src]="newsItem?.urlToImage" />
+  </ion-avatar>
+  <ion-label class="news-content">
+    <div class="news-title">{{ newsItem?.title }}</div>
+    <p class="news-description">
+      {{ newsItem?.description }}
+    </p>
+    <div class="news-time">{{ newsItem.publishedAt }}</div>
+  </ion-label>
+</div>

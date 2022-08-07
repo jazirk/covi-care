@@ -1,0 +1,28 @@
+<!-- <ion-header [translucent]="true"> -->
+
+<!-- </ion-header> -->
+
+<ion-content class="ion-content" [fullscreen]="true">
+  <ion-header collapse="condense">
+    <app-toolbar [title]="'News'" [position]="'left'"></app-toolbar>
+  </ion-header>
+  <div *ngIf="newsData.length > 0 else skeleton" class="news-container">
+    <!-- <ion-list> -->
+    <app-news-item
+      *ngFor="let news of newsData; let i=index"
+      trackBy="i"
+      [newsItem]="news"
+    ></app-news-item>
+    <!-- </ion-list> -->
+  </div>
+
+  <ng-template #skeleton>
+    <div *ngFor="let key of [1,2,3,4,5]" class="ion-padding custom-skeleton">
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <ion-skeleton-text animated></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+  </ng-template>
+</ion-content>

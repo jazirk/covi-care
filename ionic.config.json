@@ -1,7 +1,8 @@
 {
   "name": "covi-care",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }
